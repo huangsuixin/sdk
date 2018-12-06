@@ -9,9 +9,10 @@ package com.huangsuixin.sdk.response;
  * @program codecount
  */
 public class Result<T> {
+
     private boolean success;
 
-    private String message;
+    private String msg;
 
     private T data;
 
@@ -21,50 +22,78 @@ public class Result<T> {
     public Result() {
     }
 
+    @Deprecated
     public Result(boolean success) {
         this(success, null, null);
     }
 
-    public Result(boolean success, String message) {
-        this(success, message, null);
+    @Deprecated
+    public Result(boolean success, String msg) {
+        this(success, msg, null);
     }
 
-    public Result(boolean success, String message, T data) {
+    public Result(boolean success, String msg, T data) {
         this.success = success;
-        this.message = message;
+        this.msg = msg;
         this.data = data;
     }
+
+    public static <T> Result<T> buildSuccessResult(T data) {
+        return new Result<T>().setSuccess(true).setMsg(ResultEnum.SUCCESS.msg()).setData(data).setCode(ResultEnum.SUCCESS.code());
+    }
+
+    public static <T> Result<T> buildSuccessResult(String message, T data) {
+        return new Result<T>().setSuccess(true).setMsg(message).setData(data).setCode(ResultEnum.SUCCESS.code());
+    }
+
+    public static Result buildEmptySuccessResult() {
+        return new Result().setSuccess(true).setCode(ResultEnum.SUCCESS.code()).setMsg(ResultEnum.SUCCESS.msg());
+    }
+
+    public static Result buildEmptyFailureResult() {
+        return new Result().setSuccess(false).setCode(ResultEnum.FAILTURE.code()).setMsg(ResultEnum.FAILTURE.msg());
+    }
+
+    public static <TData> Result<TData> buildFailureResult(int code, String message) {
+        return new Result<TData>().setSuccess(false).setCode(code).setMsg(message);
+    }
+
+
 
     public boolean isSuccess() {
         return success;
     }
 
-    public void setSuccess(boolean success) {
+    public Result<T> setSuccess(boolean success) {
         this.success = success;
+        return this;
     }
 
-    public String getMessage() {
-        return message;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public Result<T> setMsg(String msg) {
+        this.msg = msg;
+        return this;
     }
 
-    public Object getData() {
+    public T getData() {
         return data;
     }
 
-    public void setData(T data) {
+    public Result<T> setData(T data) {
         this.data = data;
+        return this;
     }
 
     public Integer getCode() {
         return code;
     }
 
-    public void setCode(Integer code) {
+    public Result<T> setCode(Integer code) {
         this.code = code;
+        return this;
     }
 }
 
