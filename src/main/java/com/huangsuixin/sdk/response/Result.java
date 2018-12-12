@@ -54,6 +54,9 @@ public class Result<T> {
         return new Result().setSuccess(false).setCode(ResultEnum.FAILTURE.code()).setMsg(ResultEnum.FAILTURE.msg());
     }
 
+    public static <TData> Result<TData> buildFailureResult(String message) {
+        return new Result<TData>().setSuccess(false).setCode(ResultEnum.FAILTURE.code()).setMsg(message);
+    }
     public static <TData> Result<TData> buildFailureResult(int code, String message) {
         return new Result<TData>().setSuccess(false).setCode(code).setMsg(message);
     }
