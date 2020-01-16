@@ -1,8 +1,7 @@
 package priv.theo.commons.util;
 
-import com.holder.saas.tools.store.business.manage.exception.ConnectionException;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
+import priv.theo.commons.exception.ConnectionException;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -13,8 +12,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static com.holder.saas.tools.store.business.manage.constant.Constant.DRIVER_NAME;
-import static com.holder.saas.tools.store.business.manage.constant.Constant.MYSQL_HOST_PORT;
 import static priv.theo.commons.util.Utils.*;
 
 /**
@@ -25,8 +22,11 @@ import static priv.theo.commons.util.Utils.*;
  * @description JDBC工具
  * @program holder-saas-store-data-migration
  */
-@Slf4j
 public class JDBCUtils {
+    /** 驱动 */
+    private static final String DRIVER_NAME = "";
+    /** MYSQL 连接地址和端口 */
+    private static final String MYSQL_HOST_PORT = "";
 
     static {
         try {
@@ -60,7 +60,6 @@ public class JDBCUtils {
         try {
             connection = DriverManager.getConnection(MYSQL_HOST_PORT + database + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=CTT&useSSL=false", username, password);
         } catch (SQLException e) {
-            log.warn(e.getMessage(), e);
             throw new ConnectionException("数据库连接失败！" + e.getMessage(), e);
         }
         return connection;
@@ -72,10 +71,11 @@ public class JDBCUtils {
 
     /**
      * 获取连接
+     *
      * @param mysqlHostPort mysql的host和port，eg：localhost:3306
-     * @param database 数据库
-     * @param username 用户名
-     * @param password password
+     * @param database      数据库
+     * @param username      用户名
+     * @param password      password
      * @return connection
      */
     public static Connection getConnectionByHost(String mysqlHostPort, String database, String username, String password) {
@@ -85,7 +85,6 @@ public class JDBCUtils {
                     username,
                     password);
         } catch (SQLException e) {
-            log.warn(e.getMessage(), e);
             throw new RuntimeException("数据库连接失败!" + e.getMessage(), e);
         }
         return connection;
@@ -187,7 +186,8 @@ public class JDBCUtils {
             try {
                 obj = clazz.newInstance();
             } catch (InstantiationException | IllegalAccessException e) {
-                log.info(e.getMessage(), e);
+                // log.info(e.getMessage(), e);
+                System.out.println(e.getMessage());
                 continue;
             }
             // 寻找该列对应的对象属性
@@ -261,7 +261,8 @@ public class JDBCUtils {
                 try {
                     field.set(obj, value);
                 } catch (IllegalAccessException e) {
-                    log.info(e.getMessage(), e);
+                    // log.info(e.getMessage(), e);
+                    System.out.println(e.getMessage());
                 }
                 field.setAccessible(flag);
             }
@@ -443,7 +444,8 @@ public class JDBCUtils {
                 sql.append(");");
 
                 statement.addBatch(sql.toString());
-                log.debug("添加sql:{}", sql.toString());
+                // log.debug("添加sql:{}", sql.toString());
+                System.out.println("添加sql:" + sql.toString());
 
                 sql.delete(0, sql.length());
                 columnSql.delete(0, columnSql.length());
