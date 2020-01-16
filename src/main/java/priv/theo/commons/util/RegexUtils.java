@@ -1,6 +1,6 @@
-package com.huangsuixin.sdk.util;
+package priv.theo.commons.util;
 
-import com.huangsuixin.sdk.constant.RegexConstants;
+import priv.theo.commons.constant.RegexConstants;
 
 import java.util.ArrayList;
 import java.util.Collections;

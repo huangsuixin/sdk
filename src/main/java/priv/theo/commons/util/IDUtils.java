@@ -1,4 +1,4 @@
-package com.huangsuixin.sdk.util;
+package priv.theo.commons.util;
 
 import java.time.LocalDateTime;
 import java.util.concurrent.ThreadLocalRandom;

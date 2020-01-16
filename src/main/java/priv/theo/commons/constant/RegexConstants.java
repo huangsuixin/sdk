@@ -1,4 +1,4 @@
-package com.huangsuixin.sdk.constant;
+package priv.theo.commons.constant;
 
 /**
  * @author terry

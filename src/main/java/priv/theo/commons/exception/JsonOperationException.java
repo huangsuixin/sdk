@@ -1,4 +1,4 @@
-package com.huangsuixin.sdk.exception;
+package priv.theo.commons.exception;
 
 /**
  * @author jay

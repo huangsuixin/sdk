@@ -1,4 +1,4 @@
-package com.huangsuixin.sdk.response;
+package priv.theo.commons.response;
 
 /**
  * @author silence

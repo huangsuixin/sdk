@@ -1,4 +1,4 @@
-package com.huangsuixin.sdk.util;
+package priv.theo.commons.util;
 
 import java.util.regex.Pattern;
 
