@@ -1,14 +1,10 @@
 package priv.theo.commons.util;
 
-import lombok.extern.slf4j.Slf4j;
-
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
-
-import static com.holder.saas.tools.store.business.manage.constant.Constant.*;
 
 /**
  * @author huangsuixin
@@ -18,7 +14,6 @@ import static com.holder.saas.tools.store.business.manage.constant.Constant.*;
  * @description 工具
  * @program holder-saas-tools-store
  */
-@Slf4j
 public class Utils {
     public static Integer byte2Integer(Byte b) {
         if (null == b) {
@@ -126,31 +121,9 @@ public class Utils {
                 try {
                     closeable.close();
                 } catch (Exception e) {
-                    log.error("关闭连接失败！", e);
+                    throw new RuntimeException("关闭连接异常: " + e.getMessage(), e);
                 }
             }
         }
-    }
-
-
-
-    /**
-     * 获取trading数据的数据库名
-     *
-     * @param enterpriseGuid 企业guid
-     * @return dish数据库全名
-     */
-    public static String getTradingDatabaseName(String enterpriseGuid) {
-        return TRADING_DATABASE_PREFIX + enterpriseGuid + DATABASE_SUFFIX;
-    }
-
-    /**
-     * 获取business_manage数据的数据库名
-     *
-     * @param enterpriseGuid 企业guid
-     * @return item数据库全名
-     */
-    public static String getBusinessManageDatabaseName(String enterpriseGuid) {
-        return BUSINESS_MANAGE_DATABASE_PREFIX + enterpriseGuid + DATABASE_SUFFIX;
     }
 }
